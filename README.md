@@ -2,31 +2,104 @@
 
 This application was implemented using java 8
 
-API for managing rectangles features
+## Rectangle model:
 
-explanation of how interpret a rectangle (two points image) in cartisan plan from negative to
-positive numbers (image)
+A rectangle is represented by two points as described in this image:
 
-rectangle well formed
+![img.png](img.png)
 
-interpretation of point
+A well formed rectangle satisfies this rule:
 
-interpretation of LineH lineV
+![img_1.png](img_1.png)
 
-error exception and handler
+## Line model:
 
-explanation of API implementation using springboot
+Also we have lines, A horizontal line (LineH) goes from x1 to x2, having a static y value:
 
-algorithms with images
+![img_2.png](img_2.png)
 
-Document error messages
+Vertical line (LineV) goes from y1 to y2, having a static x value:
 
-kind of error and succerss mesages (json)
+![img_3.png](img_3.png)
 
-delete unused imports
+We use this Line models to analize adjacency.
 
-create unit test
+## json input for API endpoints:
 
-create different variations of adjacency in postman calls
+this is the only accepted json format, two rectangles represented by two points each:
 
-export postman collection
+```json
+[
+  {
+    "p1":{
+      "x":4,
+      "y":5
+    },
+    "p2":{
+      "x":8,
+      "y":1
+    }
+  },
+  {
+    "p1": {
+      "x":5,
+      "y":4
+    },
+    "p2":{
+      "x":7,
+      "y":2
+    }
+  }
+]
+```
+
+## API usage:
+
+### containment:
+http://localhost:8080/rectangles/containment
+
+result example:
+
+```json
+{
+  "state": true,
+  "desc": "Rectangle A is wholly contained within rectangle B"
+}
+```
+
+### intersection:
+http://localhost:8080/rectangles/intersection
+
+result example:
+
+```json
+{
+  "state": true,
+  "desc": "Rectangles have one or more intersecting lines",
+  "intersectionPoints": [
+    {
+      "x": 5,
+      "y": 9
+    },
+    {
+      "x": 3,
+      "y": 11
+    }
+  ]
+}
+```
+
+### adjacency:
+http://localhost:8080/rectangles/adjacency
+
+result example:
+
+```json
+{
+  "state": true,
+  "desc": "There is partial adjacency in the Rectangles",
+  "type": "PARTIAL_ADJACENCY"
+}
+```
+
+
