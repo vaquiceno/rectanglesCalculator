@@ -1,8 +1,10 @@
 package com.rectangles.rectanglesCalculator.controller;
 
 import com.rectangles.rectanglesCalculator.dto.ContainmentDTO;
-import com.rectangles.rectanglesCalculator.dto.http.RectanglePoints;
+import com.rectangles.rectanglesCalculator.dto.http.RectangleDTO;
+import com.rectangles.rectanglesCalculator.model.Rectangle;
 import com.rectangles.rectanglesCalculator.service.RectangleService;
+import com.rectangles.rectanglesCalculator.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,11 @@ public class RectangleController {
     RectangleService rectangleService;
 
     @PostMapping("/containment")
-    public ResponseEntity containment(@RequestBody List<RectanglePoints> rectanglePointsList){
-        ContainmentDTO containmentDTO = rectangleService.containment(rectanglePointsList);
+    public ResponseEntity containment(@RequestBody List<RectangleDTO> rectangleDTOList){
+        Utils.checkRectanglePoints(rectangleDTOList);
+        List<Rectangle> rectangles = Utils.convertRectangles(rectangleDTOList);
+        rectangles.stream().forEach(e-> System.out.println(e.getP1()));
+        ContainmentDTO containmentDTO = rectangleService.containment(rectangles);
         return new ResponseEntity(containmentDTO, HttpStatus.OK);
     }
 

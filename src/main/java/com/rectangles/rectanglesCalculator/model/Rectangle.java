@@ -1,48 +1,43 @@
 package com.rectangles.rectanglesCalculator.model;
 
 public class Rectangle {
-    Line up;
-    Line down;
-    Line left;
-    Line right;
+    private Point p1;
+    private Point p2;
 
-    public Rectangle(Line up, Line down, Line left, Line right) {
-        this.up = up;
-        this.down = down;
-        this.left = left;
-        this.right = right;
+    public Rectangle(Point p1, Point p2) {
+        this.p1 = p1;
+        this.p2 = p2;
     }
 
-    public Line getUp() {
-        return up;
+    public Point getP1() {
+        return p1;
     }
 
-    public void setUp(Line up) {
-        this.up = up;
+    public void setP1(Point p1) {
+        this.p1 = p1;
     }
 
-    public Line getDown() {
-        return down;
+    public Point getP2() {
+        return p2;
     }
 
-    public void setDown(Line down) {
-        this.down = down;
+    public void setP2(Point p2) {
+        this.p2 = p2;
     }
 
-    public Line getLeft() {
-        return left;
+    public LineH getLineUp() {
+        return new LineH(p1.getX(), p2.getX(), p1.getY());
     }
 
-    public void setLeft(Line left) {
-        this.left = left;
+    public LineH getLineDown() {
+        return new LineH(p1.getX(), p2.getX(), p2.getY());
     }
 
-    public Line getRight() {
-        return right;
+    public LineV getLineLeft() {
+        return new LineV(p1.getY(), p2.getY(), p1.getX());
     }
 
-    public void setRight(Line right) {
-        this.right = right;
+    public LineV getLineRight() {
+        return new LineV(p1.getY(), p2.getY(), p2.getX());
     }
-
 }
