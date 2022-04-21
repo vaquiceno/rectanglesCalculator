@@ -1,6 +1,7 @@
 package com.rectangles.rectanglesCalculator.service.impl;
 
 import com.rectangles.rectanglesCalculator.Constant.RectangleConstant;
+import com.rectangles.rectanglesCalculator.dto.AdjacencyDTO;
 import com.rectangles.rectanglesCalculator.dto.ContainmentDTO;
 import com.rectangles.rectanglesCalculator.dto.IntersectionDTO;
 import com.rectangles.rectanglesCalculator.model.Point;
@@ -30,7 +31,7 @@ public class RectangleServiceImpl implements RectangleService {
     public IntersectionDTO intersection(Rectangle A, Rectangle B) {
         RectangleConstant intersectionRes = RectangleConstant.NO_INTERSECTION;
         List<Point> intersectionPointList = new ArrayList<>();
-        Point intersectionPoint = null;
+        Point intersectionPoint;
         //check for perpendicular lines between both rectangles:
         //A-LineUp and B-LineLeft
         intersectionPoint = Utils.intersectionPoint(A.getLineUp(), B.getLineLeft());
@@ -54,5 +55,27 @@ public class RectangleServiceImpl implements RectangleService {
         }
 
         return new IntersectionDTO(intersectionRes.isState(), intersectionRes.getDesc(), intersectionPointList);
+    }
+
+    @Override
+    public AdjacencyDTO adjacency(Rectangle A, Rectangle B) {
+        RectangleConstant adjacencyRes;
+        //check for parallel lines between both rectangles,
+        //suitables for adjacency (external touch):
+        //A-LineUp and B-LineDown
+        adjacencyRes = Utils.adjacencyLinesH(A.getLineUp(), B.getLineDown());
+        if (adjacencyRes != RectangleConstant.NO_ADJACENCY)
+            return new AdjacencyDTO(adjacencyRes.isState(), adjacencyRes.getDesc(), adjacencyRes.toString());
+        //A-LineDown and B-LineUp
+        adjacencyRes = Utils.adjacencyLinesH(A.getLineDown(), B.getLineUp());
+        if (adjacencyRes != RectangleConstant.NO_ADJACENCY)
+            return new AdjacencyDTO(adjacencyRes.isState(), adjacencyRes.getDesc(), adjacencyRes.toString());
+        //A-LineLeft and B-LineRight
+        adjacencyRes = Utils.adjacencyLinesV(A.getLineLeft(), B.getLineRight());
+        if (adjacencyRes != RectangleConstant.NO_ADJACENCY)
+            return new AdjacencyDTO(adjacencyRes.isState(), adjacencyRes.getDesc(), adjacencyRes.toString());
+        //A-LineRight and B-LineLeft
+        adjacencyRes = Utils.adjacencyLinesV(A.getLineRight(), B.getLineLeft());
+        return new AdjacencyDTO(adjacencyRes.isState(), adjacencyRes.getDesc(), adjacencyRes.toString());
     }
 }

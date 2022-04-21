@@ -1,5 +1,6 @@
 package com.rectangles.rectanglesCalculator.util;
 
+import com.rectangles.rectanglesCalculator.Constant.RectangleConstant;
 import com.rectangles.rectanglesCalculator.dto.http.RectangleDTO;
 import com.rectangles.rectanglesCalculator.exception.ValidationException;
 import com.rectangles.rectanglesCalculator.model.LineH;
@@ -58,5 +59,45 @@ public class Utils {
             return new Point(lineV.getX(), lineH.getY());
         }
         return null;
+    }
+
+    public static RectangleConstant adjacencyLinesH(LineH lineA, LineH lineB){
+        RectangleConstant adjacencyRes = RectangleConstant.NO_ADJACENCY;
+        if (lineA.getY() == lineB.getY()){
+            // check sub-line adjacency in both directions
+            if ((lineA.getX1() > lineB.getX1() && lineA.getX2() < lineB.getX2())
+                || (lineB.getX1() > lineA.getX1() && lineB.getX2() < lineA.getX2())){
+                adjacencyRes = RectangleConstant.SUBLINE_ADJACENCY;
+            }
+            // check proper adjacency
+            else if (lineA.getX1() == lineB.getX1() && lineA.getX2() == lineB.getX2()){
+                adjacencyRes = RectangleConstant.PROPER_ADJACENCY;
+            }
+            // else is partial adjacency
+            else {
+                adjacencyRes = RectangleConstant.PARTIAL_ADJACENCY;
+            }
+        }
+        return adjacencyRes;
+    }
+
+    public static RectangleConstant adjacencyLinesV(LineV lineA, LineV lineB){
+        RectangleConstant adjacencyRes = RectangleConstant.NO_ADJACENCY;
+        if (lineA.getX() == lineB.getX()){
+            // check sub-line adjacency in both directions
+            if ((lineA.getY1() < lineB.getY1() && lineA.getY2() > lineB.getY2())
+                    || (lineB.getY1() < lineA.getY1() && lineB.getY2() > lineA.getY2())){
+                adjacencyRes = RectangleConstant.SUBLINE_ADJACENCY;
+            }
+            // check proper adjacency
+            else if (lineA.getY1() == lineB.getY1() && lineA.getY2() == lineB.getY2()){
+                adjacencyRes = RectangleConstant.PROPER_ADJACENCY;
+            }
+            // else is partial adjacency
+            else {
+                adjacencyRes = RectangleConstant.PARTIAL_ADJACENCY;
+            }
+        }
+        return adjacencyRes;
     }
 }

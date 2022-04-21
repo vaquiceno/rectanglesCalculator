@@ -1,5 +1,6 @@
 package com.rectangles.rectanglesCalculator.controller;
 
+import com.rectangles.rectanglesCalculator.dto.AdjacencyDTO;
 import com.rectangles.rectanglesCalculator.dto.ContainmentDTO;
 import com.rectangles.rectanglesCalculator.dto.IntersectionDTO;
 import com.rectangles.rectanglesCalculator.dto.http.RectangleDTO;
@@ -38,6 +39,16 @@ public class RectangleController {
         Rectangle B = rectangles.get(1);
         IntersectionDTO intersectionDTO = rectangleService.intersection(A, B);
         return new ResponseEntity(intersectionDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("/adjacency")
+    public ResponseEntity adjacency(@RequestBody List<RectangleDTO> rectangleDTOList){
+        Utils.checkRectanglePoints(rectangleDTOList);
+        List<Rectangle> rectangles = Utils.convertRectangles(rectangleDTOList);
+        Rectangle A = rectangles.get(0);
+        Rectangle B = rectangles.get(1);
+        AdjacencyDTO adjacencyDTO = rectangleService.adjacency(A, B);
+        return new ResponseEntity(adjacencyDTO, HttpStatus.OK);
     }
 
 }
