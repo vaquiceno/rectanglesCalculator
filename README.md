@@ -1,6 +1,6 @@
 # rectanglesCalculator
 
-This application was implemented using java 8
+This application was implemented using java 8 and springboot
 
 ## Rectangle model:
 
