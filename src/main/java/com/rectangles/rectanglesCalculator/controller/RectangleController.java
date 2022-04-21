@@ -23,8 +23,9 @@ public class RectangleController {
     public ResponseEntity containment(@RequestBody List<RectangleDTO> rectangleDTOList){
         Utils.checkRectanglePoints(rectangleDTOList);
         List<Rectangle> rectangles = Utils.convertRectangles(rectangleDTOList);
-        rectangles.stream().forEach(e-> System.out.println(e.getP1()));
-        ContainmentDTO containmentDTO = rectangleService.containment(rectangles);
+        Rectangle A = rectangles.get(0);
+        Rectangle B = rectangles.get(1);
+        ContainmentDTO containmentDTO = rectangleService.containment(A, B);
         return new ResponseEntity(containmentDTO, HttpStatus.OK);
     }
 

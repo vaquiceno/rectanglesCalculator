@@ -1,9 +1,9 @@
 package com.rectangles.rectanglesCalculator.dto.error;
 
-public class ResponseError {
+public class ResponseErrorDTO {
     private String error;
 
-    public ResponseError(String error) {
+    public ResponseErrorDTO(String error) {
         this.error = error;
     }
 
