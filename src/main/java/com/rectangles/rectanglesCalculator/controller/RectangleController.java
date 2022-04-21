@@ -1,6 +1,7 @@
 package com.rectangles.rectanglesCalculator.controller;
 
 import com.rectangles.rectanglesCalculator.dto.ContainmentDTO;
+import com.rectangles.rectanglesCalculator.dto.IntersectionDTO;
 import com.rectangles.rectanglesCalculator.dto.http.RectangleDTO;
 import com.rectangles.rectanglesCalculator.model.Rectangle;
 import com.rectangles.rectanglesCalculator.service.RectangleService;
@@ -27,6 +28,16 @@ public class RectangleController {
         Rectangle B = rectangles.get(1);
         ContainmentDTO containmentDTO = rectangleService.containment(A, B);
         return new ResponseEntity(containmentDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("/intersection")
+    public ResponseEntity intersection(@RequestBody List<RectangleDTO> rectangleDTOList){
+        Utils.checkRectanglePoints(rectangleDTOList);
+        List<Rectangle> rectangles = Utils.convertRectangles(rectangleDTOList);
+        Rectangle A = rectangles.get(0);
+        Rectangle B = rectangles.get(1);
+        IntersectionDTO intersectionDTO = rectangleService.intersection(A, B);
+        return new ResponseEntity(intersectionDTO, HttpStatus.OK);
     }
 
 }

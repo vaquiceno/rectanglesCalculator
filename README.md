@@ -16,6 +16,8 @@ algorithms with images
 
 Document error messages
 
+kind of error and succerss mesages (json)
+
 delete unused imports
 
 create unit test

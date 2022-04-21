@@ -2,9 +2,15 @@ package com.rectangles.rectanglesCalculator.service.impl;
 
 import com.rectangles.rectanglesCalculator.Constant.RectangleConstant;
 import com.rectangles.rectanglesCalculator.dto.ContainmentDTO;
+import com.rectangles.rectanglesCalculator.dto.IntersectionDTO;
+import com.rectangles.rectanglesCalculator.model.Point;
 import com.rectangles.rectanglesCalculator.model.Rectangle;
 import com.rectangles.rectanglesCalculator.service.RectangleService;
+import com.rectangles.rectanglesCalculator.util.Utils;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RectangleServiceImpl implements RectangleService {
@@ -18,5 +24,35 @@ public class RectangleServiceImpl implements RectangleService {
             containmentRes = RectangleConstant.CONTAINMENT;
         }
         return new ContainmentDTO(containmentRes.isState(), containmentRes.getDesc());
+    }
+
+    @Override
+    public IntersectionDTO intersection(Rectangle A, Rectangle B) {
+        RectangleConstant intersectionRes = RectangleConstant.NO_INTERSECTION;
+        List<Point> intersectionPointList = new ArrayList<>();
+        Point intersectionPoint = null;
+        //check for perpendicular lines between both rectangles:
+        //A-LineUp and B-LineLeft
+        intersectionPoint = Utils.intersectionPoint(A.getLineUp(), B.getLineLeft());
+        if (intersectionPoint != null)
+            intersectionPointList.add(intersectionPoint);
+        //A-LineUp and B-LineRight
+        intersectionPoint = Utils.intersectionPoint(A.getLineUp(), B.getLineRight());
+        if (intersectionPoint != null)
+            intersectionPointList.add(intersectionPoint);
+        //A-LineDown and B-LineLeft
+        intersectionPoint = Utils.intersectionPoint(A.getLineDown(), B.getLineLeft());
+        if (intersectionPoint != null)
+            intersectionPointList.add(intersectionPoint);
+        //A-LineDown and B-LineRight
+        intersectionPoint = Utils.intersectionPoint(A.getLineDown(), B.getLineRight());
+        if (intersectionPoint != null)
+            intersectionPointList.add(intersectionPoint);
+
+        if (intersectionPointList.size() > 0){
+            intersectionRes = RectangleConstant.INTERSECTION;
+        }
+
+        return new IntersectionDTO(intersectionRes.isState(), intersectionRes.getDesc(), intersectionPointList);
     }
 }

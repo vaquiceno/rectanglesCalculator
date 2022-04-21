@@ -2,6 +2,9 @@ package com.rectangles.rectanglesCalculator.util;
 
 import com.rectangles.rectanglesCalculator.dto.http.RectangleDTO;
 import com.rectangles.rectanglesCalculator.exception.ValidationException;
+import com.rectangles.rectanglesCalculator.model.LineH;
+import com.rectangles.rectanglesCalculator.model.LineV;
+import com.rectangles.rectanglesCalculator.model.Point;
 import com.rectangles.rectanglesCalculator.model.Rectangle;
 
 import java.util.List;
@@ -45,5 +48,15 @@ public class Utils {
         if (rectangleDTOList.size() != LIST_SIZE)
             throw new ValidationException("List must have two sets of two points (two Rectangles)");
         return rectangleDTOList.stream().map(r -> new Rectangle(r.getP1(), r.getP2())).collect(Collectors.toList());
+    }
+
+    public static Point intersectionPoint(LineH lineH, LineV lineV){
+        if (lineV.getX() > lineH.getX1()
+            && lineV.getX() < lineH.getX2()
+            && lineH.getY() < lineV.getY1()
+            && lineH.getY() > lineV.getY2()){
+            return new Point(lineV.getX(), lineH.getY());
+        }
+        return null;
     }
 }
