@@ -1,5 +1,7 @@
 package com.rectangles.rectanglesCalculator.model;
 
+import java.util.Objects;
+
 public class Rectangle {
     private Point p1;
     private Point p2;
@@ -39,5 +41,13 @@ public class Rectangle {
 
     public LineV getLineRight() {
         return new LineV(p1.getY(), p2.getY(), p2.getX());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Rectangle)) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return Objects.equals(p1, rectangle.p1) && Objects.equals(p2, rectangle.p2);
     }
 }

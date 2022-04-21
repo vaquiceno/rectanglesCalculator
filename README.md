@@ -1,4 +1,7 @@
 # rectanglesCalculator
+
+This application was implemented using java 8
+
 API for managing rectangles features
 
 explanation of how interpret a rectangle (two points image) in cartisan plan from negative to
@@ -23,5 +26,7 @@ kind of error and succerss mesages (json)
 delete unused imports
 
 create unit test
+
+create different variations of adjacency in postman calls
 
 export postman collection

@@ -1,5 +1,7 @@
 package com.rectangles.rectanglesCalculator.model;
 
+import java.util.Objects;
+
 public class Point {
     private Integer x;
     private Integer y;
@@ -25,4 +27,11 @@ public class Point {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Point)) return false;
+        Point point = (Point) o;
+        return Objects.equals(x, point.x) && Objects.equals(y, point.y);
+    }
 }

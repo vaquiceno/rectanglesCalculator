@@ -50,6 +50,23 @@ public class RectangleServiceImpl implements RectangleService {
         if (intersectionPoint != null)
             intersectionPointList.add(intersectionPoint);
 
+        //B-LineUp and A-LineLeft
+        intersectionPoint = Utils.intersectionPoint(B.getLineUp(), A.getLineLeft());
+        if (intersectionPoint != null)
+            intersectionPointList.add(intersectionPoint);
+        //B-LineUp and A-LineRight
+        intersectionPoint = Utils.intersectionPoint(B.getLineUp(), A.getLineRight());
+        if (intersectionPoint != null)
+            intersectionPointList.add(intersectionPoint);
+        //B-LineDown and A-LineLeft
+        intersectionPoint = Utils.intersectionPoint(B.getLineDown(), A.getLineLeft());
+        if (intersectionPoint != null)
+            intersectionPointList.add(intersectionPoint);
+        //B-LineDown and A-LineRight
+        intersectionPoint = Utils.intersectionPoint(B.getLineDown(), A.getLineRight());
+        if (intersectionPoint != null)
+            intersectionPointList.add(intersectionPoint);
+
         if (intersectionPointList.size() > 0){
             intersectionRes = RectangleConstant.INTERSECTION;
         }
