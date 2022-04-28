@@ -108,4 +108,18 @@ public class RectangleServiceImplTest {
         assertEquals(rectangleService.adjacency(RECTANGLE_8, RECTANGLE_3), ADJACENCY_DTO_1);
     }
 
+    private static final Point P17 = new Point(3, 4);
+    private static final Point P18 = new Point(8, 1);
+    private static final Rectangle RECTANGLE_9 = new Rectangle(P17, P18);
+
+    private static final Point P19 = new Point(8, 8);
+    private static final Point P20 = new Point(11, 5);
+    private static final Rectangle RECTANGLE_10 = new Rectangle(P19, P20);
+    private static final AdjacencyDTO ADJACENCY_DTO_2 = new AdjacencyDTO(RectangleConstant.NO_ADJACENCY.isState(), RectangleConstant.NO_ADJACENCY.getDesc(), RectangleConstant.NO_ADJACENCY.toString());
+    @Test
+    public void nuv() {
+        assertEquals(rectangleService.adjacency(RECTANGLE_9, RECTANGLE_10), ADJACENCY_DTO_2);
+        assertEquals(rectangleService.adjacency(RECTANGLE_10, RECTANGLE_9), ADJACENCY_DTO_2);
+    }
+
 }

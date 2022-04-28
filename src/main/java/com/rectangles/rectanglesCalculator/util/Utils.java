@@ -94,7 +94,9 @@ public class Utils {
                 adjacencyRes = RectangleConstant.PROPER_ADJACENCY;
             }
             // else is partial adjacency
-            else {
+            else if (lineA.getY1() < lineB.getY2() || lineA.getY2() > lineB.getY1()){
+                adjacencyRes = RectangleConstant.NO_ADJACENCY;
+            } else {
                 adjacencyRes = RectangleConstant.PARTIAL_ADJACENCY;
             }
         }
